@@ -44,8 +44,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{ chetrafc60@gmail.com }}
-        password: ${{ gxxldtbxdbphbvhc }}
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
         subject: Build Succeeded
         body: The build for commit ${{ github.sha }} has succeeded. Good job!
         to: sochetra.hok77@gmail.com, ${{ github.event.head_commit.committer.email }}
@@ -57,8 +57,8 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: ${{ chetrafc60@gmail.com }}
-        password: ${{ gxxldtbxdbphbvhc }}
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
         subject: Build Failed
         body: The build for commit ${{ github.sha }} has failed. Please review the logs and address the issues.
         to: sochetra.hok77@gmail.com, ${{ github.event.head_commit.committer.email }}
