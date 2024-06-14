@@ -45,7 +45,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 465
         username: ${{ secrets.GMAIL_USERNAME }}
-        password: ${{ secrets.gxxl dtbx dbph bvhc }}  # Use app-specific password if 2FA is enabled
+        password: ${{ secrets.gxxldtbxdbphbvhc }}  # Use app-specific password if 2FA is enabled
         subject: Build Succeeded
         body: The build for commit ${{ github.sha }} has succeeded. Good job!
         to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
@@ -58,7 +58,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 465
         username: ${{ secrets.GMAIL_USERNAME }}
-        password: ${{ secrets.gxxl dtbx dbph bvhc }}  # Use app-specific password if 2FA is enabled
+        password: ${{ secrets.gxxldtbxdbphbvhc }}  # Use app-specific password if 2FA is enabled
         subject: Build Failed
         body: The build for commit ${{ github.sha }} has failed. Please review the logs and address the issues.
         to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
