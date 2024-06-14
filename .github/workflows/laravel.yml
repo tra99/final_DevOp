@@ -40,88 +40,26 @@ jobs:
 
     - name: Notify on Success
       if: success()
-      uses: actions/github-script@v6
+      uses: dawidd6/action-send-mail@v3
       with:
-        script: |
-          const nodemailer = require("nodemailer");
-
-          async function main() {
-            let transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                user: process.env.GMAIL_USERNAME,
-                pass: process.env.GMAIL_PASSWORD
-              }
-            });
-
-            let info = await transporter.sendMail({
-              from: '"GitHub Actions" <no-reply@example.com>',
-              to: "tongmeng016@gmail.com",
-              subject: "Build Succeeded",
-              text: `The build for commit ${context.sha} has succeeded. Good job!`
-            });
-
-            console.log("Message sent: %s", info.messageId);
-          }
-
-          main().catch(console.error);
-
-          // Notify the committer
-          const { payload } = context;
-          const committerEmail = payload.head_commit.committer.email;
-
-          main().then(() => {
-            return transporter.sendMail({
-              from: '"GitHub Actions" <no-reply@example.com>',
-              to: committerEmail,
-              subject: "Build Succeeded",
-              text: `The build for your commit ${context.sha} has succeeded. Good job!`
-            });
-          }).catch(console.error);
-      env:
-        GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
-        GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
+        subject: Build Succeeded
+        body: The build for commit ${{ github.sha }} has succeeded. Good job!
+        to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
+        from: no-reply@example.com
 
     - name: Notify on Failure
       if: failure()
-      uses: actions/github-script@v6
+      uses: dawidd6/action-send-mail@v3
       with:
-        script: |
-          const nodemailer = require("nodemailer");
-
-          async function main() {
-            let transporter = nodemailer.createTransport({
-              service: 'gmail',
-              auth: {
-                user: process.env.GMAIL_USERNAME,
-                pass: process.env.GMAIL_PASSWORD
-              }
-            });
-
-            let info = await transporter.sendMail({
-              from: '"GitHub Actions" <no-reply@example.com>',
-              to: "tongmeng016@gmail.com",
-              subject: "Build Failed",
-              text: `The build for commit ${context.sha} has failed. Please review the logs and address the issues.`
-            });
-
-            console.log("Message sent: %s", info.messageId);
-          }
-
-          main().catch(console.error);
-
-          // Notify the committer
-          const { payload } = context;
-          const committerEmail = payload.head_commit.committer.email;
-
-          main().then(() => {
-            return transporter.sendMail({
-              from: '"GitHub Actions" <no-reply@example.com>',
-              to: committerEmail,
-              subject: "Build Failed",
-              text: `The build for your commit ${context.sha} has failed. Please review the logs and address the issues.`
-            });
-          }).catch(console.error);
-      env:
-        GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
-        GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.GMAIL_USERNAME }}
+        password: ${{ secrets.GMAIL_PASSWORD }}
+        subject: Build Failed
+        body: The build for commit ${{ github.sha }} has failed. Please review the logs and address the issues.
+        to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
+        from: no-reply@example.com
