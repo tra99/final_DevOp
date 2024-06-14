@@ -48,7 +48,7 @@ jobs:
         password: ${{ secrets.GMAIL_PASSWORD }}
         subject: Build Succeeded
         body: The build for commit ${{ github.sha }} has succeeded. Good job!
-        to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
+        to: sochetra.hok77@gmail.com, ${{ github.event.head_commit.committer.email }}
         from: no-reply@example.com
 
     - name: Notify on Failure
