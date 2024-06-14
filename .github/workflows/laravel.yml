@@ -48,7 +48,7 @@ jobs:
         password: ${{ secrets.gxxldtbxdbphbvhc }}  # Use app-specific password if 2FA is enabled
         subject: Build Succeeded
         body: The build for commit ${{ github.sha }} has succeeded. Good job!
-        to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
+        to: tongmeng016@gmail.com, ${{ github.event.head_commit.committer.email }}
         from: no-reply@example.com
 
     - name: Notify on Failure
@@ -61,5 +61,5 @@ jobs:
         password: ${{ secrets.gxxldtbxdbphbvhc }}  # Use app-specific password if 2FA is enabled
         subject: Build Failed
         body: The build for commit ${{ github.sha }} has failed. Please review the logs and address the issues.
-        to: tongsreng@itc.edu.kh, ${{ github.event.head_commit.committer.email }}
+        to: tongmeng016@gmail.com, ${{ github.event.head_commit.committer.email }}
         from: no-reply@example.com
