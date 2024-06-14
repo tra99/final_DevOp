@@ -37,3 +37,30 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
+    - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: storage/logs/laravel.log # adjust the path to your log file
+
+      - name: Send email if build fails
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: 'smtp.gmail.com'
+          server_port: 465
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_PASSWORD }}
+          subject: 'Build Failed: ${{ github.repository }}'
+          to: 'tongmeng016@gmail.com, e20201056@itc.edu.kh, chhit085@gmail.com' // replace your gmail
+          from: ${{ secrets.GMAIL_USERNAME }}
+          body: |
+            The build for the repository ${{ github.repository }} has failed.
+            Commit: ${{ github.sha }}
+            Repository: ${{ github.repository }}
+            Branch: ${{ github.ref }}
+            Logs: See attached log file.
+          attachments: |
+            storage/logs/laravel.log # adjust the path to your log file
+
